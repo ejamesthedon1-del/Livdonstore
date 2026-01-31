@@ -567,7 +567,7 @@ body {
 
 /* CELINE Project Grid */
 .o-project-grid {
-  padding: 2rem 1rem;
+  padding: 1.25rem 1rem 2rem 1rem;
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
@@ -584,7 +584,7 @@ body {
   letter-spacing: 0.01em;
   text-transform: uppercase;
   margin-bottom: 2rem;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .o-project-grid__inner {
@@ -656,7 +656,7 @@ body {
   font-size: 0.875rem;
   letter-spacing: 0;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .o-project-grid__item a {
@@ -677,7 +677,7 @@ body {
   line-height: 1.5;
   letter-spacing: 0.01em;
   text-transform: uppercase;
-  font-weight: 500;
+  font-weight: 700;
 }
 
 .f-display--02 {
