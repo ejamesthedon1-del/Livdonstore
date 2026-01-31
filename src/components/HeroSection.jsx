@@ -26,15 +26,6 @@ const HeroSection = () => {
         <h1 className="f-display--02 f-display--bold">
           NEW COLLECTION "PRINTEMPS 2026"
         </h1>
-        <div className="a-rich-text__inner">
-          <div className="m-media m-media--has-text">
-            <div className="m-media__text">
-              <p className="f-body f-body--bold">
-                DISCOVER THE NEW ARRIVALS FOR SPRING.
-              </p>
-            </div>
-          </div>
-        </div>
         <div className="a-rich-text__button">
           <a href={heroImage.link} className="a-btn a-btn--outline">
             DISCOVER OUR NEW COLLECTION

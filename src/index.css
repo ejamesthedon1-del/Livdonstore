@@ -518,13 +518,13 @@ body {
 }
 
 .a-rich-text__button {
-  margin-top: 2rem;
+  margin-top: 0.5rem;
   text-align: left;
 }
 
 @media (min-width: 768px) {
   .a-rich-text__button {
-    margin-top: 2.5rem;
+    margin-top: 0.75rem;
   }
 }
 
