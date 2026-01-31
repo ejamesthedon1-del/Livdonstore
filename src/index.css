@@ -256,6 +256,12 @@ body {
   width: auto;
 }
 
+@media (max-width: 1023px) {
+  .a-logo__img {
+    max-height: 50px;
+  }
+}
+
 .g-header-desktop {
   display: none;
   align-items: center;
