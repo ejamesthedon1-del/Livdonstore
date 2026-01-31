@@ -750,12 +750,12 @@ body {
 }
 
 .small-mt {
-  margin-top: 0.25rem;
+  margin-top: 0.5rem;
 }
 
 @media (min-width: 768px) {
   .small-mt {
-    margin-top: 0.5rem;
+    margin-top: 0.75rem;
   }
 }
 
