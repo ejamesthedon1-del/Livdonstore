@@ -202,7 +202,7 @@ body {
 
 .g-header-search-input {
   width: 100%;
-  padding: 0.5rem 0;
+  padding: 0.5rem 0 0.25rem 0;
   border: none;
   border-bottom: 1px solid #000;
   background: transparent;
@@ -211,6 +211,7 @@ body {
   text-transform: uppercase;
   color: #000;
   font-family: inherit;
+  line-height: 1.2;
 }
 
 .g-header-search-input::placeholder {
