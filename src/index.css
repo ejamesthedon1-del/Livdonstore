@@ -393,12 +393,12 @@ body {
 
 /* Rich Text Styles */
 .a-rich-text {
-  padding: 0.5rem 1rem 2rem 1rem;
+  padding: 0.5rem 0 2rem 0;
 }
 
 @media (min-width: 768px) {
   .a-rich-text {
-    padding: 1rem 2rem 3rem 2rem;
+    padding: 1rem 0 3rem 0;
   }
 }
 
@@ -584,8 +584,8 @@ body {
 }
 
 .a-btn--outline:hover {
-  background: #000;
-  color: #fff;
+  background: transparent;
+  color: #000;
 }
 
 /* CELINE Project Grid */
@@ -706,7 +706,7 @@ body {
 
 .f-display--02 {
   font-size: 2rem;
-  line-height: 1.2;
+  line-height: 1.0;
   letter-spacing: 0;
   font-weight: 400;
   margin-bottom: 1rem;
