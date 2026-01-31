@@ -860,10 +860,10 @@ body {
 }
 
 .m-breadcrumb__item h1 {
-  font-size: 2rem;
+  font-size: 0.875rem;
   line-height: 1.0;
-  letter-spacing: 0;
-  font-weight: 900;
+  letter-spacing: 0.01em;
+  font-weight: 700;
   margin: 0;
   color: #000;
   text-transform: uppercase;
@@ -871,7 +871,7 @@ body {
 
 @media (min-width: 768px) {
   .m-breadcrumb__item h1 {
-    font-size: 3rem;
+    font-size: 0.875rem;
   }
 }
 

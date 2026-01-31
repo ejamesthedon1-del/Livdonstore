@@ -24,7 +24,9 @@ const ProductListingPage = ({ onBack }) => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Sample product data
+  // Sample product data with grey placeholder images
+  const greyPlaceholder = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwMCIgaGVpZ2h0PSIxMDAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjEwMDAiIGZpbGw9IiNlNWU1ZTUiLz48L3N2Zz4='
+  
   const products = [
     {
       id: 1,
@@ -32,10 +34,7 @@ const ProductListingPage = ({ onBack }) => {
       color: 'TAN',
       price: '1,950',
       link: '#product-1',
-      images: [
-        'https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-        'https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80',
-      ],
+      images: [greyPlaceholder, greyPlaceholder],
       inStock: true,
     },
     {
@@ -44,10 +43,7 @@ const ProductListingPage = ({ onBack }) => {
       color: 'BLACK',
       price: '2,100',
       link: '#product-2',
-      images: [
-        'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-        'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      ],
+      images: [greyPlaceholder, greyPlaceholder],
       inStock: true,
     },
     {
@@ -56,9 +52,7 @@ const ProductListingPage = ({ onBack }) => {
       color: 'BEIGE',
       price: '1,800',
       link: '#product-3',
-      images: [
-        'https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      ],
+      images: [greyPlaceholder],
       inStock: true,
     },
     {
@@ -67,10 +61,7 @@ const ProductListingPage = ({ onBack }) => {
       color: 'BROWN',
       price: '2,300',
       link: '#product-4',
-      images: [
-        'https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80',
-        'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      ],
+      images: [greyPlaceholder, greyPlaceholder],
       inStock: true,
     },
     {
@@ -79,10 +70,7 @@ const ProductListingPage = ({ onBack }) => {
       color: 'NAVY',
       price: '1,650',
       link: '#product-5',
-      images: [
-        'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-        'https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      ],
+      images: [greyPlaceholder, greyPlaceholder],
       inStock: true,
     },
     {
@@ -91,9 +79,7 @@ const ProductListingPage = ({ onBack }) => {
       color: 'RED',
       price: '2,500',
       link: '#product-6',
-      images: [
-        'https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      ],
+      images: [greyPlaceholder],
       inStock: false,
     },
     {
@@ -102,10 +88,7 @@ const ProductListingPage = ({ onBack }) => {
       color: 'WHITE',
       price: '1,900',
       link: '#product-7',
-      images: [
-        'https://images.unsplash.com/photo-1445205170230-053b83016050?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80',
-        'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      ],
+      images: [greyPlaceholder, greyPlaceholder],
       inStock: true,
     },
     {
@@ -114,9 +97,7 @@ const ProductListingPage = ({ onBack }) => {
       color: 'GREEN',
       price: '1,750',
       link: '#product-8',
-      images: [
-        'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      ],
+      images: [greyPlaceholder],
       inStock: true,
     },
   ]
