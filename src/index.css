@@ -194,7 +194,7 @@ body {
   .g-header-search-mobile {
     display: block;
     position: fixed;
-    top: 84px;
+    top: 62px; /* Moved up 2 tad bits more */
     left: 0;
     right: 0;
     z-index: 45;
@@ -665,7 +665,7 @@ body {
 
 @media (max-width: 1023px) {
   .homepage {
-    padding-top: 110px; /* Header height + search input height (reduced further) */
+    padding-top: 90px; /* Adjusted for search input position */
   }
   
   .main--scrolled .homepage {
