@@ -83,7 +83,7 @@ body {
 .o-sidebar-nav__link {
   display: block;
   padding: 1rem 0;
-  font-size: 0.875rem;
+  font-size: 0.625rem;
   letter-spacing: 0;
   text-transform: uppercase;
   text-decoration: none;
@@ -214,7 +214,7 @@ body {
   border: none;
   border-bottom: 1px solid #000;
   background: transparent;
-  font-size: 0.875rem;
+  font-size: 0.625rem;
   letter-spacing: 0;
   text-transform: uppercase;
   color: #000;
@@ -226,7 +226,7 @@ body {
   color: #999;
   text-transform: uppercase;
   letter-spacing: 0;
-  font-size: 0.75rem;
+  font-size: 0.625rem;
 }
 
 .g-header-search-input:focus {
@@ -426,7 +426,7 @@ body {
   gap: 0.5rem;
   text-decoration: none;
   color: #000;
-  font-size: 0.75rem;
+  font-size: 0.625rem;
   letter-spacing: 0;
   text-transform: uppercase;
 }
@@ -437,7 +437,7 @@ body {
 
 .a-cart__infos--mobile {
   display: inline;
-  font-size: 0.75rem;
+  font-size: 0.625rem;
 }
 
 @media (min-width: 768px) {
@@ -567,7 +567,7 @@ body {
   background: transparent;
   color: #000;
   text-decoration: none;
-  font-size: 0.875rem;
+  font-size: 0.625rem;
   letter-spacing: 0.01em;
   text-transform: uppercase;
   font-weight: 500;
@@ -604,7 +604,7 @@ body {
 }
 
 .o-project-grid h3 {
-  font-size: 0.875rem;
+  font-size: 0.625rem;
   letter-spacing: 0.01em;
   text-transform: uppercase;
   margin-bottom: 0.75rem;
@@ -677,7 +677,7 @@ body {
 
 .o-project-grid__img-wrapper figcaption {
   margin-top: 1rem;
-  font-size: 0.875rem;
+  font-size: 0.625rem;
   letter-spacing: 0;
   text-transform: uppercase;
   font-weight: 700;
@@ -691,13 +691,13 @@ body {
 
 /* CELINE Typography */
 .f-body {
-  font-size: 0.875rem;
+  font-size: 0.625rem;
   line-height: 1.5;
   letter-spacing: 0;
 }
 
 .f-body--em {
-  font-size: 0.875rem;
+  font-size: 0.625rem;
   line-height: 1.5;
   letter-spacing: 0.01em;
   text-transform: uppercase;
@@ -796,7 +796,7 @@ body {
 }
 
 .g-footer__location {
-  font-size: 0.75rem;
+  font-size: 0.625rem;
   letter-spacing: 0;
   text-transform: uppercase;
   color: #000;
@@ -812,7 +812,7 @@ body {
 }
 
 .g-footer__link {
-  font-size: 0.75rem;
+  font-size: 0.625rem;
   letter-spacing: 0;
   text-transform: uppercase;
   color: #000;
