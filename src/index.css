@@ -409,6 +409,37 @@ body {
   transform: scale(1.05);
 }
 
+.a-rich-text__button {
+  margin-top: 2rem;
+  text-align: left;
+}
+
+@media (min-width: 768px) {
+  .a-rich-text__button {
+    margin-top: 2.5rem;
+  }
+}
+
+.a-btn--outline {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  border: 1px solid #000;
+  background: transparent;
+  color: #000;
+  text-decoration: none;
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.a-btn--outline:hover {
+  background: #000;
+  color: #fff;
+}
+
 /* CELINE Project Grid */
 .o-project-grid {
   padding: 2rem 1rem;
@@ -501,12 +532,24 @@ body {
   letter-spacing: 0.02em;
   font-weight: 400;
   margin-bottom: 1rem;
+  color: #000;
+  text-transform: uppercase;
+}
+
+.f-display--bold {
+  font-weight: 700;
 }
 
 @media (min-width: 768px) {
   .f-display--02 {
     font-size: 3rem;
   }
+}
+
+.f-body--bold {
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #000;
 }
 
 /* Homepage Container */
