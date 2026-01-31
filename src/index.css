@@ -644,8 +644,8 @@ body {
 .o-project-grid__item {
   position: relative;
   flex: 0 0 auto;
-  width: calc(80% - 0.5rem);
-  min-width: calc(80% - 0.5rem);
+  width: calc(70% - 0.5rem);
+  min-width: calc(70% - 0.5rem);
 }
 
 @media (min-width: 768px) {
