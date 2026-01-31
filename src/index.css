@@ -545,6 +545,15 @@ body {
   text-align: left;
 }
 
+@media (max-width: 767px) {
+  .a-rich-text__button {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
 @media (min-width: 768px) {
   .a-rich-text__button {
     margin-top: 0.75rem;
@@ -564,6 +573,14 @@ body {
   font-weight: 500;
   transition: all 0.3s ease;
   cursor: pointer;
+}
+
+@media (max-width: 767px) {
+  .a-btn--outline {
+    display: block;
+    width: 100%;
+    text-align: center;
+  }
 }
 
 .a-btn--outline:hover {
