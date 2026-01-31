@@ -3,6 +3,7 @@ import { FiMenu, FiX, FiSearch, FiShoppingBag } from 'react-icons/fi'
 import HeroSection from './HeroSection'
 import ImageSlider from './ImageSlider'
 import Footer from './Footer'
+import MobileMenu from './MobileMenu'
 
 const LandingPage = ({ onNavigateToProducts, onNavigateToContact }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -110,49 +111,12 @@ const LandingPage = ({ onNavigateToProducts, onNavigateToContact }) => {
       {/* Main Content with CELINE Grid System */}
       <main id="content" className={`a17-grid ${isScrolled ? 'main--scrolled' : ''}`}>
         {/* Left Sidebar Navigation */}
-        <div className={`a17-grid__left o-sidebar-nav ${isMenuOpen ? 'o-sidebar-nav--open' : ''}`}>
-          <nav className="o-sidebar-nav__nav" aria-labelledby="sidebar-nav-label">
-            <p className="sr-only" id="sidebar-nav-label">SIDEBAR NAVIGATION</p>
-            <ul className="o-sidebar-nav__list">
-              <li>
-                <a
-                  href="#shop"
-                  className="a-btn a-btn--as-link o-sidebar-nav__link"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  SHOP
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#collections"
-                  className="a-btn a-btn--as-link o-sidebar-nav__link"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  COLLECTIONS
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#about"
-                  className="a-btn a-btn--as-link o-sidebar-nav__link"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  ABOUT
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#contact"
-                  className="a-btn a-btn--as-link o-sidebar-nav__link"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  CONTACT
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
+        <MobileMenu
+          isOpen={isMenuOpen}
+          onClose={() => setIsMenuOpen(false)}
+          cartItemCount={cartItemCount}
+          onNavigateToContact={onNavigateToContact}
+        />
         <div className="a17-grid__right">
           <div className="home-main homepage">
             <HeroSection onNavigateToProducts={onNavigateToProducts} />

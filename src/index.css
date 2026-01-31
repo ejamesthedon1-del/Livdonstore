@@ -98,21 +98,114 @@ body {
 /* Mobile: Hide sidebar by default, show when menu is open */
 @media (max-width: 1023px) {
   .o-sidebar-nav {
+    display: flex;
     position: fixed;
-    top: 84px;
+    top: 0;
     left: 0;
-    width: 280px;
-    max-width: 80vw;
-    height: calc(100vh - 84px);
+    width: 100vw;
+    height: 100vh;
     background: white;
-    z-index: 40;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease-in-out;
-    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    z-index: 50;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    overflow-y: auto;
+    padding: 0;
   }
 
   .o-sidebar-nav--open {
-    transform: translateX(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .o-sidebar-nav__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+  }
+
+  .o-sidebar-nav__header .a-logo {
+    display: flex;
+    align-items: center;
+  }
+
+  .o-sidebar-nav__header .a-logo__img {
+    max-height: 50px;
+  }
+
+  .o-sidebar-nav__close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  .o-sidebar-nav__close svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    stroke-width: 2.5;
+  }
+
+  .o-sidebar-nav__nav {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .o-sidebar-nav__list {
+    padding: 2rem 1rem;
+    flex: 1;
+  }
+
+  .o-sidebar-nav__link {
+    padding: 1.5rem 0;
+    font-size: 0.8125rem;
+    letter-spacing: 0.01em;
+    border-bottom: none;
+    font-weight: 400;
+  }
+
+  .o-sidebar-nav__utilities {
+    padding: 2rem 1rem 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .o-sidebar-nav__utility-link {
+    font-size: 0.8125rem;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: #000;
+    text-decoration: none;
+    padding: 1.5rem 0;
+    font-weight: 400;
+  }
+
+  .o-sidebar-nav__region {
+    padding: 1.5rem 1rem;
+  }
+
+  .o-sidebar-nav__region-link {
+    font-size: 0.6875rem;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: #000;
+    text-decoration: none;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 400;
   }
 }
 
@@ -125,11 +218,12 @@ body {
   .o-sidebar-nav__mask {
     display: block;
     position: fixed;
-    top: 84px;
+    top: 0;
     left: 0;
     right: 0;
+    bottom: 0;
     width: 100%;
-    height: calc(100vh - 84px);
+    height: 100vh;
     background: rgba(0, 0, 0, 0.5);
     z-index: 35;
     cursor: pointer;
