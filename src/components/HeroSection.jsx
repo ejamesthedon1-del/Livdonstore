@@ -20,6 +20,19 @@ const HeroSection = () => {
             </a>
           </div>
         </div>
+        <div className="m-media m-media--has-media o-tetris__second-image">
+          <div className="m-media__media a-ratio-box a-ratio-box--1:1" data-row-number="1" data-picture-number="2">
+            <a href={heroImage.link} className="m-media__media-cta">
+              <img
+                src={heroImage.image}
+                alt=""
+                title=""
+                data-sizes="auto"
+                className=""
+              />
+            </a>
+          </div>
+        </div>
       </div>
       
       <div className="a-rich-text a-rich-text--main title-and-link-and-desc">

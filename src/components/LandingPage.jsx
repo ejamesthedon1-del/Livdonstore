@@ -31,7 +31,7 @@ const LandingPage = () => {
         <div className="g-header-logo">
           <h1>
             <a href="/" className="a-logo" title="LIVDON | HOMEPAGE">
-              LIVDON
+              <img src="/Asset_1.png.webp" alt="LIVDON" className="a-logo__img" />
             </a>
           </h1>
           
