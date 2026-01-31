@@ -1,4 +1,11 @@
-const Footer = () => {
+const Footer = ({ onNavigateToContact }) => {
+  const handleContactClick = (e) => {
+    e.preventDefault()
+    if (onNavigateToContact) {
+      onNavigateToContact()
+    }
+  }
+
   return (
     <footer className="g-footer" id="goToFooter" role="contentinfo">
       <div className="g-footer__wrapper">
@@ -10,7 +17,7 @@ const Footer = () => {
             >
               <strong>UNITED STATES | EN</strong>
             </button>
-            <a href="#contact" className="a-btn a-btn--as-link g-footer__link">
+            <a href="#contact" className="a-btn a-btn--as-link g-footer__link" onClick={handleContactClick}>
               CONTACT US
             </a>
             <a href="#faq" className="a-btn a-btn--as-link g-footer__link">

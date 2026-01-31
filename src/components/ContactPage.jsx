@@ -1,19 +1,16 @@
 import { useState, useEffect } from 'react'
-import { FiMenu, FiX, FiSearch, FiShoppingBag } from 'react-icons/fi'
-import HeroSection from './HeroSection'
-import ImageSlider from './ImageSlider'
+import { FiMenu, FiSearch, FiShoppingBag } from 'react-icons/fi'
 import Footer from './Footer'
 
-const LandingPage = ({ onNavigateToProducts, onNavigateToContact }) => {
+const ContactPage = ({ onBack }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-  const [cartItemCount, setCartItemCount] = useState(0) // Cart items count
+  const [cartItemCount, setCartItemCount] = useState(0)
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
 
-  // Handle scroll detection for mobile search
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
@@ -23,14 +20,13 @@ const LandingPage = ({ onNavigateToProducts, onNavigateToContact }) => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-
   return (
     <div className="min-h-screen bg-white">
       {/* CELINE-style Header */}
       <header id="header">
         <div className="g-header-logo">
           <h1>
-            <a href="/" className="a-logo" title="LIVDON | HOMEPAGE">
+            <a href="/" className="a-logo" title="LIVDON | HOMEPAGE" onClick={(e) => { e.preventDefault(); onBack && onBack() }}>
               <img src="/Asset_1.png.webp" alt="LIVDON" className="a-logo__img" />
             </a>
           </h1>
@@ -155,15 +151,63 @@ const LandingPage = ({ onNavigateToProducts, onNavigateToContact }) => {
         </div>
         <div className="a17-grid__right">
           <div className="home-main homepage">
-            <HeroSection onNavigateToProducts={onNavigateToProducts} />
-            <ImageSlider />
+            <div className="o-contact-page">
+              {/* Client Service Hours */}
+              <div className="m-contact-info">
+                <p className="m-contact-info__hours f-body">
+                  THE LIVDON CLIENT SERVICE IS OPEN FROM MONDAY TO FRIDAY, 10 AM TO 7 PM (EASTERN TIME), EXCLUDING HOLIDAYS.
+                </p>
+              </div>
+
+              {/* Contact Details */}
+              <div className="m-contact-details">
+                <div className="m-contact-details__item">
+                  <h3 className="m-contact-details__label f-body--em">PHONE</h3>
+                  <p className="m-contact-details__value f-body">
+                    <a href="tel:+18338474860" className="m-contact-details__link">+1 833 847 4860</a>
+                  </p>
+                </div>
+
+                <div className="m-contact-details__item">
+                  <h3 className="m-contact-details__label f-body--em">CUSTOMER SERVICE</h3>
+                  <p className="m-contact-details__value f-body">
+                    <a href="mailto:clientservice.us@livdon.com" className="m-contact-details__link">CLIENTSERVICE.US@LIVDON.COM</a>
+                  </p>
+                </div>
+
+                <div className="m-contact-details__item">
+                  <h3 className="m-contact-details__label f-body--em">CONTACT FORM</h3>
+                  <p className="m-contact-details__value f-body">
+                    <a href="#contact-form" className="m-contact-details__link m-contact-details__link--action">SEND INQUIRY</a>
+                  </p>
+                </div>
+
+                <div className="m-contact-details__item">
+                  <h3 className="m-contact-details__label f-body--em">REQUEST AN APPOINTMENT</h3>
+                  <p className="m-contact-details__value f-body">
+                    <a href="#appointment" className="m-contact-details__link m-contact-details__link--action">SELECT A STORE</a>
+                  </p>
+                </div>
+              </div>
+
+              {/* Store Image */}
+              <div className="m-contact-image">
+                <div className="a-ratio-box a-ratio-box--4:5">
+                  <img
+                    src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwMCIgaGVpZ2h0PSIxMjUwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjEyNTAiIGZpbGw9IiNlNWU1ZTUiLz48L3N2Zz4="
+                    alt="LIVDON Store Interior"
+                    className=""
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </main>
 
-      <Footer onNavigateToContact={onNavigateToContact} />
+      <Footer />
     </div>
   )
 }
 
-export default LandingPage
+export default ContactPage

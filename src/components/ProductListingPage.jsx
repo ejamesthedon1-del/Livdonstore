@@ -3,7 +3,7 @@ import { FiMenu, FiX, FiSearch, FiShoppingBag } from 'react-icons/fi'
 import ProductTile from './ProductTile'
 import Footer from './Footer'
 
-const ProductListingPage = ({ onBack }) => {
+const ProductListingPage = ({ onBack, onNavigateToContact }) => {
   const [showInStockOnly, setShowInStockOnly] = useState(false)
   const [sortBy, setSortBy] = useState('SUGGESTED')
   const [showFilters, setShowFilters] = useState(false)
@@ -323,7 +323,7 @@ const ProductListingPage = ({ onBack }) => {
         </div>
       </main>
 
-      <Footer />
+      <Footer onNavigateToContact={onNavigateToContact} />
     </div>
   )
 }
