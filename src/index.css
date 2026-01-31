@@ -276,13 +276,10 @@ body {
   order: 2;
 }
 
-.a-ham--right {
-  order: 3;
-  margin-left: auto;
-}
-
 .a-ham--mobile-only {
   display: block;
+  order: 3;
+  margin-left: auto;
 }
 
 @media (min-width: 1024px) {

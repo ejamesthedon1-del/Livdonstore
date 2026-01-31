@@ -7,6 +7,7 @@ import Footer from './Footer'
 const LandingPage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [cartItemCount, setCartItemCount] = useState(0) // Cart items count
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -39,26 +40,30 @@ const LandingPage = () => {
             <button type="button" className="a-search a-search--desktop" aria-label="SEARCH">
               <FiSearch className="w-5 h-5" />
             </button>
-            <div className="minicart minicart--s-empty">
-              <a className="a-btn a-btn--as-link minicart-link a-cart a-cart--s-empty" href="#cart">
-                <FiShoppingBag className="w-5 h-5" />
-                <span className="a-cart__infos">
-                  SHOPPING BAG (<span className="minicart-quantity a-cart__quantity">0</span>)
-                </span>
-              </a>
-            </div>
+            {cartItemCount > 0 && (
+              <div className="minicart">
+                <a className="a-btn a-btn--as-link minicart-link a-cart" href="#cart">
+                  <FiShoppingBag className="w-5 h-5" />
+                  <span className="a-cart__infos">
+                    SHOPPING BAG (<span className="minicart-quantity a-cart__quantity">{cartItemCount}</span>)
+                  </span>
+                </a>
+              </div>
+            )}
           </div>
           
           {/* Mobile Header Controls */}
           <div className="g-header-mobile">
-            <div className="minicart minicart--s-empty">
-              <a className="a-btn a-btn--as-link minicart-link a-cart a-cart--s-empty" href="#cart">
-                <FiShoppingBag className="w-5 h-5" />
-                <span className="a-cart__infos a-cart__infos--mobile">
-                  (<span className="minicart-quantity a-cart__quantity">0</span>)
-                </span>
-              </a>
-            </div>
+            {cartItemCount > 0 && (
+              <div className="minicart">
+                <a className="a-btn a-btn--as-link minicart-link a-cart" href="#cart">
+                  <FiShoppingBag className="w-5 h-5" />
+                  <span className="a-cart__infos a-cart__infos--mobile">
+                    (<span className="minicart-quantity a-cart__quantity">{cartItemCount}</span>)
+                  </span>
+                </a>
+              </div>
+            )}
             
             {/* Search Icon - Show when scrolled */}
             {isScrolled && (
@@ -70,7 +75,7 @@ const LandingPage = () => {
             {/* Hamburger Menu - Mobile Only, Right Side */}
             <button
               type="button"
-              className="a-ham a-ham--mobile-only a-ham--right"
+              className="a-ham a-ham--mobile-only"
               aria-pressed={isMenuOpen}
               onClick={toggleMenu}
               aria-label="NAVIGATION"
