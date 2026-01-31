@@ -6,10 +6,21 @@ import Footer from './Footer'
 
 const LandingPage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false)
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
+
+  // Handle scroll detection for mobile search
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
 
   return (
@@ -49,14 +60,17 @@ const LandingPage = () => {
               </a>
             </div>
             
-            <button type="button" className="a-search" aria-label="SEARCH">
-              <FiSearch className="w-5 h-5" />
-            </button>
+            {/* Search Icon - Show when scrolled */}
+            {isScrolled && (
+              <button type="button" className="a-search a-search--mobile-scrolled" aria-label="SEARCH">
+                <FiSearch className="w-5 h-5" />
+              </button>
+            )}
             
-            {/* Hamburger Menu - Mobile Only */}
+            {/* Hamburger Menu - Mobile Only, Right Side */}
             <button
               type="button"
-              className="a-ham a-ham--mobile-only"
+              className="a-ham a-ham--mobile-only a-ham--right"
               aria-pressed={isMenuOpen}
               onClick={toggleMenu}
               aria-label="NAVIGATION"
@@ -66,6 +80,16 @@ const LandingPage = () => {
               <span className={`a-ham__menu ${isMenuOpen ? 'a-ham__menu--close' : ''}`}></span>
             </button>
           </div>
+        </div>
+        
+        {/* Mobile Search Input - Below Header */}
+        <div className={`g-header-search-mobile ${isScrolled ? 'g-header-search-mobile--hidden' : ''}`}>
+          <input
+            type="text"
+            placeholder="SEARCH"
+            className="g-header-search-input"
+            aria-label="Search"
+          />
         </div>
       </header>
 
@@ -79,7 +103,7 @@ const LandingPage = () => {
       )}
 
       {/* Main Content with CELINE Grid System */}
-      <main id="content" className="a17-grid">
+      <main id="content" className={`a17-grid ${isScrolled ? 'main--scrolled' : ''}`}>
         {/* Left Sidebar Navigation */}
         <div className={`a17-grid__left o-sidebar-nav ${isMenuOpen ? 'o-sidebar-nav--open' : ''}`}>
           <nav className="o-sidebar-nav__nav" aria-labelledby="sidebar-nav-label">
