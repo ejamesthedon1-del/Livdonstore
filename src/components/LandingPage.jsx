@@ -4,7 +4,7 @@ import HeroSection from './HeroSection'
 import ImageSlider from './ImageSlider'
 import Footer from './Footer'
 
-const LandingPage = () => {
+const LandingPage = ({ onNavigateToProducts }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [cartItemCount, setCartItemCount] = useState(0) // Cart items count
@@ -155,7 +155,7 @@ const LandingPage = () => {
         </div>
         <div className="a17-grid__right">
           <div className="home-main homepage">
-            <HeroSection />
+            <HeroSection onNavigateToProducts={onNavigateToProducts} />
             <ImageSlider />
           </div>
         </div>

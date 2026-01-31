@@ -1,7 +1,14 @@
-const HeroSection = () => {
+const HeroSection = ({ onNavigateToProducts }) => {
   const heroImage = {
     image: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
     link: '#new-collection',
+  }
+
+  const handleButtonClick = (e) => {
+    e.preventDefault()
+    if (onNavigateToProducts) {
+      onNavigateToProducts()
+    }
   }
 
   return (
@@ -40,7 +47,7 @@ const HeroSection = () => {
           NEW COLLECTION "PRINTEMPS 2026"
         </h1>
         <div className="a-rich-text__button">
-          <a href={heroImage.link} className="a-btn a-btn--outline">
+          <a href={heroImage.link} className="a-btn a-btn--outline" onClick={handleButtonClick}>
             DISCOVER OUR NEW COLLECTION
           </a>
         </div>
