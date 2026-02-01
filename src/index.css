@@ -1414,35 +1414,26 @@ body {
   object-fit: cover;
 }
 
-/* Thumbnail Strip */
+/* Thumbnail Grid - 2 columns */
 .o-product__gallery-thumbnails {
   width: 100%;
   max-width: 100%;
   padding: 1rem 0;
-  overflow-x: auto;
-  overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  overflow-x: hidden;
 }
 
-.o-product__gallery-thumbnails::-webkit-scrollbar {
-  display: none;
-}
-
-.o-product__gallery-thumbnails-inner {
-  display: flex;
-  flex-direction: row;
+.o-product__gallery-thumbnails-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 0.5rem;
   padding: 0 1rem;
-  width: max-content;
+  width: 100%;
   max-width: 100%;
 }
 
 .o-product__gallery-thumbnail {
-  flex-shrink: 0;
-  width: 80px;
-  height: 80px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
   padding: 0;
   border: 1px solid transparent;
   background: none;
@@ -1463,28 +1454,6 @@ body {
   border-color: #000;
 }
 
-/* Pagination Indicators */
-.o-product__gallery-pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 0;
-}
-
-.o-product__gallery-pagination-dot {
-  width: 40px;
-  height: 2px;
-  background: #e5e5e5;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  transition: background-color 0.3s ease;
-}
-
-.o-product__gallery-pagination-dot.s-active {
-  background: #000;
-}
 
 /* Product Header - Now positioned after gallery */
 .o-product__header {
@@ -2096,16 +2065,9 @@ body {
 
 /* Responsive adjustments */
 @media (max-width: 767px) {
-  .o-product__gallery-thumbnails-inner {
+  .o-product__gallery-thumbnails-grid {
     padding: 0 0.5rem;
-    max-width: 100%;
-  }
-
-  .o-product__gallery-thumbnail {
-    width: 60px;
-    height: 60px;
-    max-width: 60px;
-    flex-shrink: 0;
+    gap: 0.5rem;
   }
 
   .prices-add-to-cart-actions {

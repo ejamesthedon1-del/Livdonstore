@@ -45,39 +45,25 @@ const ProductGallery = ({ images, productTitle }) => {
           </button>
         </div>
 
-        {/* Thumbnail Strip */}
+        {/* Thumbnail Grid - 2 columns, 2 rows (4 images max) */}
         {images.length > 1 && (
           <div className="o-product__gallery-thumbnails">
-            <div className="o-product__gallery-thumbnails-inner">
-              {images.map((image, index) => (
+            <div className="o-product__gallery-thumbnails-grid">
+              {images.slice(1, 5).map((image, index) => (
                 <button
-                  key={index}
-                  className={`o-product__gallery-thumbnail ${index === selectedImageIndex ? 's-selected' : ''}`}
-                  onClick={() => handleThumbnailClick(index)}
-                  aria-label={`Select image ${index + 1}`}
+                  key={index + 1}
+                  className={`o-product__gallery-thumbnail ${index + 1 === selectedImageIndex ? 's-selected' : ''}`}
+                  onClick={() => handleThumbnailClick(index + 1)}
+                  aria-label={`Select image ${index + 2}`}
                 >
                   <img
                     src={image}
-                    alt={`${productTitle} thumbnail ${index + 1}`}
+                    alt={`${productTitle} thumbnail ${index + 2}`}
                     loading="lazy"
                   />
                 </button>
               ))}
             </div>
-          </div>
-        )}
-
-        {/* Pagination Indicators */}
-        {images.length > 1 && (
-          <div className="o-product__gallery-pagination">
-            {images.map((_, index) => (
-              <div
-                key={index}
-                className={`o-product__gallery-pagination-dot ${index === selectedImageIndex ? 's-active' : ''}`}
-                onClick={() => handleThumbnailClick(index)}
-                aria-label={`Go to image ${index + 1}`}
-              />
-            ))}
           </div>
         )}
       </div>
