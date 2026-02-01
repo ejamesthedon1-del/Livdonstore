@@ -1697,6 +1697,97 @@ body {
   max-width: 100%;
 }
 
+/* Puller Signal - Visual indicator at top of CTA section */
+.o-product__cta-puller {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .o-product__cta-puller {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1rem 0 1rem;
+    margin: 0 -1rem 0.75rem -1rem;
+    cursor: grab;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: pan-y;
+    flex-shrink: 0;
+    width: calc(100% + 2rem);
+    max-width: calc(100% + 2rem);
+    box-sizing: border-box;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .o-product__cta-puller:active {
+    cursor: grabbing;
+  }
+
+  .o-product__cta-puller--dragging {
+    opacity: 0.8;
+  }
+
+  .o-product__cta-puller--fade {
+    opacity: 0.3;
+  }
+
+  .o-product__cta-puller-handle {
+    width: 40px;
+    height: 4px;
+    background-color: #d0d0d0;
+    border-radius: 2px;
+    margin: 0 auto 1rem auto;
+    flex-shrink: 0;
+  }
+
+  /* Use same styling as product header */
+  .o-product__cta-puller .o-product__header-titles {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    word-wrap: break-word;
+    text-align: left;
+  }
+
+  .o-product__cta-puller .o-product__title {
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    line-height: 1.4;
+    margin: 0;
+    text-transform: uppercase;
+    width: 100%;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+
+  .o-product__cta-puller .o-product__title-truncate {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+
+  .o-product__cta-puller .prices {
+    font-size: 0.875rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    width: 100%;
+    max-width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+  }
+
+  .o-product__cta-puller .prices strong {
+    font-weight: 700;
+  }
+}
+
 .prices-add-to-cart-actions {
   display: flex;
   flex-direction: row;

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { FiMenu, FiSearch, FiShoppingBag } from 'react-icons/fi'
+import { FiShoppingBag } from 'react-icons/fi'
 import ProductGallery from './ProductGallery'
 import ProductSelectors from './ProductSelectors'
 import ProductInfoSection from './ProductInfoSection'
@@ -13,6 +13,10 @@ const ProductDetailPage = ({ productId, onBack, onNavigateToContact }) => {
   const [cartItemCount, setCartItemCount] = useState(0)
   const [selectedColor, setSelectedColor] = useState(null)
   const [selectedSize, setSelectedSize] = useState(null)
+  const [isDragging, setIsDragging] = useState(false)
+  const [dragStartY, setDragStartY] = useState(0)
+  const [dragCurrentY, setDragCurrentY] = useState(0)
+  const [isGalleryVisible, setIsGalleryVisible] = useState(true)
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -21,10 +25,34 @@ const ProductDetailPage = ({ productId, onBack, onNavigateToContact }) => {
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
+      
+      // Check if gallery is still visible in viewport
+      const gallery = document.querySelector('.o-product__gallery')
+      const productHeader = document.querySelector('[data-oproductscroll-header]')
+      
+      if (gallery && productHeader) {
+        const galleryRect = gallery.getBoundingClientRect()
+        const headerRect = productHeader.getBoundingClientRect()
+        const viewportHeight = window.innerHeight
+        
+        // Gallery is visible if any part of it is in the viewport and header hasn't reached top
+        const galleryInView = galleryRect.bottom > 0 && galleryRect.top < viewportHeight
+        const headerReachedTop = headerRect.top <= 0
+        
+        setIsGalleryVisible(galleryInView && !headerReachedTop)
+      }
     }
 
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll() // Initial check
+    
+    // Also check on resize
+    window.addEventListener('resize', handleScroll, { passive: true })
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleScroll)
+    }
   }, [])
 
   // Sample product data - in a real app, this would come from an API based on productId
@@ -88,6 +116,80 @@ const ProductDetailPage = ({ productId, onBack, onNavigateToContact }) => {
     alert(`Buy Now: ${product.title} - ${selectedColor} - Size ${selectedSize}`)
   }
 
+  // Scroll to product header function
+  const scrollToProductHeader = () => {
+    const productHeader = document.querySelector('[data-oproductscroll-header]')
+    if (productHeader) {
+      productHeader.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
+
+  // Drag handlers for puller
+  const handlePullerTouchStart = (e) => {
+    setIsDragging(true)
+    setDragStartY(e.touches[0].clientY)
+    setDragCurrentY(e.touches[0].clientY)
+  }
+
+  const handlePullerTouchMove = (e) => {
+    if (!isDragging) return
+    const currentY = e.touches[0].clientY
+    setDragCurrentY(currentY)
+  }
+
+  const handlePullerTouchEnd = () => {
+    if (!isDragging) return
+    
+    const dragDistance = dragStartY - dragCurrentY
+    const dragThreshold = 30 // Minimum pixels to trigger scroll
+    
+    if (dragDistance > dragThreshold) {
+      // User dragged upward, scroll to product header
+      scrollToProductHeader()
+    }
+    
+    setIsDragging(false)
+    setDragStartY(0)
+    setDragCurrentY(0)
+  }
+
+  const handlePullerMouseDown = (e) => {
+    setIsDragging(true)
+    setDragStartY(e.clientY)
+    setDragCurrentY(e.clientY)
+  }
+
+  // Add global mouse event listeners for drag
+  useEffect(() => {
+    if (!isDragging) return
+
+    const handleGlobalMouseMove = (e) => {
+      setDragCurrentY(e.clientY)
+    }
+
+    const handleGlobalMouseUp = () => {
+      const dragDistance = dragStartY - dragCurrentY
+      const dragThreshold = 30 // Minimum pixels to trigger scroll
+      
+      if (dragDistance > dragThreshold) {
+        // User dragged upward, scroll to product header
+        scrollToProductHeader()
+      }
+      
+      setIsDragging(false)
+      setDragStartY(0)
+      setDragCurrentY(0)
+    }
+    
+    document.addEventListener('mousemove', handleGlobalMouseMove)
+    document.addEventListener('mouseup', handleGlobalMouseUp)
+    
+    return () => {
+      document.removeEventListener('mousemove', handleGlobalMouseMove)
+      document.removeEventListener('mouseup', handleGlobalMouseUp)
+    }
+  }, [isDragging, dragStartY, dragCurrentY])
+
   return (
     <div className="min-h-screen bg-white" style={{ width: '100%', maxWidth: '100vw', overflowX: 'hidden' }}>
       {/* CELINE-style Header */}
@@ -101,9 +203,6 @@ const ProductDetailPage = ({ productId, onBack, onNavigateToContact }) => {
           
           {/* Desktop Header Controls */}
           <div className="g-header-desktop">
-            <button type="button" className="a-search a-search--desktop" aria-label="SEARCH">
-              <FiSearch className="w-5 h-5" />
-            </button>
             {cartItemCount > 0 && (
               <div className="minicart">
                 <a className="a-btn a-btn--as-link minicart-link a-cart" href="#cart">
@@ -129,12 +228,6 @@ const ProductDetailPage = ({ productId, onBack, onNavigateToContact }) => {
               </div>
             )}
             
-            {isScrolled && (
-              <button type="button" className="a-search a-search--mobile-scrolled" aria-label="SEARCH">
-                <FiSearch className="w-5 h-5" />
-              </button>
-            )}
-            
             <button
               type="button"
               className="a-ham"
@@ -149,18 +242,6 @@ const ProductDetailPage = ({ productId, onBack, onNavigateToContact }) => {
             </button>
           </div>
         </div>
-
-        {/* Mobile Search Input */}
-        {!isScrolled && (
-          <div className="g-header-search-mobile">
-            <input
-              type="text"
-              placeholder="SEARCH"
-              className="g-header-search-input"
-              aria-label="Search"
-            />
-          </div>
-        )}
       </header>
 
       {/* Mobile Backdrop Mask */}
@@ -276,6 +357,29 @@ const ProductDetailPage = ({ productId, onBack, onNavigateToContact }) => {
                   {/* CTA Actions - Side by side buttons (moved after related products) */}
                   <div className="o-product__cta-actions" data-oproductscroll-actions="">
                     <div className="o-product__cta-actions-inner">
+                      {/* Puller Signal */}
+                      <div 
+                        className={`o-product__cta-puller ${isDragging ? 'o-product__cta-puller--dragging' : ''} ${isGalleryVisible ? 'o-product__cta-puller--fade' : ''}`}
+                        onTouchStart={handlePullerTouchStart}
+                        onTouchMove={handlePullerTouchMove}
+                        onTouchEnd={handlePullerTouchEnd}
+                        onMouseDown={handlePullerMouseDown}
+                      >
+                        <div className="o-product__cta-puller-handle"></div>
+                        <div className="o-product__header-titles">
+                          <h1 className="o-product__title f-body">
+                            <span className="o-product__title-truncate f-body">{product.title}</span>
+                          </h1>
+                          <p className="f-body--em">
+                            <span className="prices">
+                              <strong data-description="value" className="f-body--em" content={product.price.replace(/,/g, '')}>
+                                {product.price} USD
+                              </strong>
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                      
                       <div className="a11y" aria-live="polite" id="add-to-cart-live" role="status"></div>
                       
                       <div className="prices-add-to-cart-actions o-product__action-ctas">
