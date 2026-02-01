@@ -6,11 +6,12 @@ import MobileMenu from './MobileMenu'
 
 const ProductListingPage = ({ onBack, onNavigateToContact, onNavigateToProductDetail }) => {
   const [showInStockOnly, setShowInStockOnly] = useState(false)
-  const [sortBy, setSortBy] = useState('SUGGESTED')
+  const [sortBy, setSortBy] = useState('PRICE LOW TO HIGH')
   const [showFilters, setShowFilters] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [cartItemCount, setCartItemCount] = useState(0)
+  const [showSortDropdown, setShowSortDropdown] = useState(false)
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -24,6 +25,20 @@ const ProductListingPage = ({ onBack, onNavigateToContact, onNavigateToProductDe
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Close sort dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (showSortDropdown && !event.target.closest('.g-selectors')) {
+        setShowSortDropdown(false)
+      }
+    }
+
+    if (showSortDropdown) {
+      document.addEventListener('mousedown', handleClickOutside)
+      return () => document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [showSortDropdown])
 
   // Sample product data with grey placeholder images
   const greyPlaceholder = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwMCIgaGVpZ2h0PSIxMDAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjEwMDAiIGZpbGw9IiNlNWU1ZTUiLz48L3N2Zz4='
@@ -246,23 +261,45 @@ const ProductListingPage = ({ onBack, onNavigateToContact, onNavigateToProductDe
                       </div>
                     </li>
 
-                    <li className="g-selectors" data-behavior="oSorting">
-                      <p className="a-btn a-btn--as-link g-selectors--open" id="sorting-btn" data-label="Sort By">
-                        Sort By
-                      </p>
-                      <select
-                        className="g-selectors--menu"
-                        aria-labelledby="sorting-btn"
-                        value={sortBy}
-                        onChange={(e) => setSortBy(e.target.value)}
-                      >
-                        <option value="SUGGESTED">SUGGESTED</option>
-                        <option value="PRICE LOW TO HIGH">PRICE LOW TO HIGH</option>
-                        <option value="PRICE HIGH TO LOW">PRICE HIGH TO LOW</option>
-                      </select>
-                    </li>
+                    <li className="m-filters__right-group">
+                      <div className="g-selectors" data-behavior="oSorting">
+                        <button
+                          type="button"
+                          className="a-btn a-btn--as-link g-selectors--open"
+                          id="sorting-btn"
+                          onClick={() => setShowSortDropdown(!showSortDropdown)}
+                          aria-expanded={showSortDropdown}
+                        >
+                          Sort By
+                        </button>
+                        {showSortDropdown && (
+                          <div className="g-selectors--menu-wrapper">
+                            <div className="g-selectors--menu">
+                              <button
+                                type="button"
+                                className={`g-selectors--option ${sortBy === 'PRICE LOW TO HIGH' ? 'g-selectors--option-active' : ''}`}
+                                onClick={() => {
+                                  setSortBy('PRICE LOW TO HIGH')
+                                  setShowSortDropdown(false)
+                                }}
+                              >
+                                PRICE LOW TO HIGH
+                              </button>
+                              <button
+                                type="button"
+                                className={`g-selectors--option ${sortBy === 'PRICE HIGH TO LOW' ? 'g-selectors--option-active' : ''}`}
+                                onClick={() => {
+                                  setSortBy('PRICE HIGH TO LOW')
+                                  setShowSortDropdown(false)
+                                }}
+                              >
+                                PRICE HIGH TO LOW
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
 
-                    <li>
                       <button
                         type="button"
                         className="a-btn a-btn--as-link"
@@ -273,6 +310,29 @@ const ProductListingPage = ({ onBack, onNavigateToContact, onNavigateToProductDe
                       </button>
                     </li>
                   </ul>
+                </div>
+              </div>
+
+              {/* Collection Hero Image */}
+              <div className="o-collection-hero">
+                <div className="m-media m-media--has-media">
+                  <div className="m-media__media a-ratio-box a-ratio-box--4:5">
+                    <img
+                      src={greyPlaceholder}
+                      alt="NEW COLLECTION WOMEN"
+                      className=""
+                    />
+                  </div>
+                </div>
+                
+                {/* Headline and Subtext */}
+                <div className="a-rich-text a-rich-text--main">
+                  <h1 className="f-display--02 f-display--bold">
+                    NEW COLLECTION "PRINTEMPS 2026"
+                  </h1>
+                  <p className="f-body">
+                    DISCOVER OUR LATEST COLLECTION OF PREMIUM LUXURY ITEMS
+                  </p>
                 </div>
               </div>
 
