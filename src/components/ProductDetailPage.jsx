@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { FiMenu, FiSearch, FiShoppingBag } from 'react-icons/fi'
 import ProductGallery from './ProductGallery'
 import ProductSelectors from './ProductSelectors'
+import ProductInfoSection from './ProductInfoSection'
+import RelatedProduct from './RelatedProduct'
 import Footer from './Footer'
 import MobileMenu from './MobileMenu'
 
@@ -206,50 +208,7 @@ const ProductDetailPage = ({ productId, onBack, onNavigateToContact }) => {
                   </div>
                 </div>
 
-                {/* CTA Actions - Side by side buttons */}
-                <div className="o-product__cta-actions" data-oproductscroll-actions="">
-                  <div className="o-product__cta-actions-inner">
-                    <div className="a11y" aria-live="polite" id="add-to-cart-live" role="status"></div>
-                    
-                    <div className="prices-add-to-cart-actions o-product__action-ctas">
-                      {/* Apple Pay Button */}
-                      <button
-                        className="apple-pay-button a-btn"
-                        type="button"
-                        onClick={handleBuyNow}
-                        aria-label="Pay with Apple Pay"
-                      >
-                        <svg className="apple-pay-icon" width="18" height="18" viewBox="0 0 18 18" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                          <path d="M12.5 1.5c-.8-1.3-2.1-2.3-3.5-2.3-1.4 0-2.7 1-3.5 2.3-.8 1.3-1 2.9-.4 4.1.6 1.2 1.5 2.2 2.4 3.1.9.9 2 1.9 3.1 2.4 1.2.5 2.8.3 4.1-.4 1.3-.8 2.3-2.1 2.3-3.5 0-1.4-1-2.7-2.3-3.5-.5-.3-1.1-.5-1.6-.7zm-1.6 1.3c.5.1 1.1.4 1.6.7 1.3.8 2.3 2.1 2.3 3.5 0 1.4-1 2.7-2.3 3.5-1.3.8-2.9 1-4.1.4-1.2-.5-2.2-1.4-3.1-2.4-.9-.9-1.9-2-2.4-3.1-.6-1.2-.4-2.8.4-4.1.8-1.3 2.1-2.3 3.5-2.3 1.4 0 2.7 1 3.5 2.3z"/>
-                          <path d="M9 5c-.2 0-.4.2-.4.4v7.2c0 .2.2.4.4.4s.4-.2.4-.4V5.4c0-.2-.2-.4-.4-.4z"/>
-                          <path d="M6.5 7.5c-.2 0-.4.2-.4.4v2.2c0 .2.2.4.4.4s.4-.2.4-.4V7.9c0-.2-.2-.4-.4-.4zm5 0c-.2 0-.4.2-.4.4v2.2c0 .2.2.4.4.4s.4-.2.4-.4V7.9c0-.2-.2-.4-.4-.4z"/>
-                        </svg>
-                        <span>Pay</span>
-                      </button>
-
-                      {/* Add to Bag Button */}
-                      <button
-                        className="add-to-cart a-btn"
-                        type="button"
-                        onClick={handleAddToBag}
-                        data-default-text="ADD TO BAG"
-                        data-result-text="ADDED"
-                      >
-                        ADD TO BAG
-                      </button>
-                    </div>
-
-                    {/* Terms of Service */}
-                    <p className="f-body a-text a-text--secondary a-text--apple-pay-notice">
-                      By placing your order you agree to the{' '}
-                      <a href="/terms-of-service" className="policy-link link--on-gray-bg" target="_blank" rel="noopener noreferrer">
-                        terms of service
-                      </a>
-                    </p>
-                  </div>
-                </div>
-
-                {/* Product Content - Selectors moved below CTA */}
+                {/* Product Content - Selectors and additional info */}
                 <div className="o-product__content" data-oproductscroll-content="">
                   <form className="o-form o-form--selectors s-appears-complete" id="form-product">
                     <ProductSelectors
@@ -261,6 +220,101 @@ const ProductDetailPage = ({ productId, onBack, onNavigateToContact }) => {
                       onSizeChange={setSelectedSize}
                     />
                   </form>
+
+                  {/* Estimated Delivery Date */}
+                  <div className="o-product__delivery-info">
+                    <p className="f-body--em">
+                      ESTIMATED DELIVERY DATE: STARTING FROM TUESDAY FEBRUARY 3
+                    </p>
+                  </div>
+
+                  {/* Expandable Sections */}
+                  <div className="o-product__info-sections">
+                    {/* Details Section */}
+                    <ProductInfoSection
+                      title="DETAILS"
+                      content="Product details and specifications will appear here when expanded."
+                    />
+
+                    {/* Care and Maintenance Section */}
+                    <ProductInfoSection
+                      title="CARE AND MAINTENANCE"
+                      content="Care instructions and maintenance guidelines will appear here when expanded."
+                    />
+                  </div>
+
+                  {/* Information Links */}
+                  <div className="o-product__info-links">
+                    <a href="#check-availability" className="o-product__info-link">
+                      CHECK AVAILABILITY IN STORE &gt;
+                    </a>
+                    <a href="#shipping" className="o-product__info-link">
+                      SHIPPING &gt;
+                    </a>
+                    <a href="#returns" className="o-product__info-link">
+                      RETURNS AND EXCHANGES (WITHIN 14 DAYS) &gt;
+                    </a>
+                  </div>
+
+                  {/* You May Also Like Section */}
+                  <div className="o-product__related">
+                    <h3 className="o-product__related-title f-body--em">YOU MAY ALSO LIKE</h3>
+                    <div className="o-product__related-products">
+                      <RelatedProduct
+                        image="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwMCIgaGVpZ2h0PSIxMDAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjEwMDAiIGZpbGw9IiMxMzE4MjMiLz48L3N2Zz4="
+                        title="NAVY BLAZER"
+                        onNavigateToProductDetail={() => {}}
+                      />
+                      <RelatedProduct
+                        image="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwMCIgaGVpZ2h0PSIxMDAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjEwMDAiIGZpbGw9IiMyRDNGMkMiLz48L3N2Zz4="
+                        title="GREEN BLAZER"
+                        onNavigateToProductDetail={() => {}}
+                      />
+                    </div>
+                  </div>
+
+                  {/* CTA Actions - Side by side buttons (moved after related products) */}
+                  <div className="o-product__cta-actions" data-oproductscroll-actions="">
+                    <div className="o-product__cta-actions-inner">
+                      <div className="a11y" aria-live="polite" id="add-to-cart-live" role="status"></div>
+                      
+                      <div className="prices-add-to-cart-actions o-product__action-ctas">
+                        {/* Apple Pay Button */}
+                        <button
+                          className="apple-pay-button a-btn"
+                          type="button"
+                          onClick={handleBuyNow}
+                          aria-label="Pay with Apple Pay"
+                        >
+                          <svg className="apple-pay-icon" width="18" height="18" viewBox="0 0 18 18" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.5 1.5c-.8-1.3-2.1-2.3-3.5-2.3-1.4 0-2.7 1-3.5 2.3-.8 1.3-1 2.9-.4 4.1.6 1.2 1.5 2.2 2.4 3.1.9.9 2 1.9 3.1 2.4 1.2.5 2.8.3 4.1-.4 1.3-.8 2.3-2.1 2.3-3.5 0-1.4-1-2.7-2.3-3.5-.5-.3-1.1-.5-1.6-.7zm-1.6 1.3c.5.1 1.1.4 1.6.7 1.3.8 2.3 2.1 2.3 3.5 0 1.4-1 2.7-2.3 3.5-1.3.8-2.9 1-4.1.4-1.2-.5-2.2-1.4-3.1-2.4-.9-.9-1.9-2-2.4-3.1-.6-1.2-.4-2.8.4-4.1.8-1.3 2.1-2.3 3.5-2.3 1.4 0 2.7 1 3.5 2.3z"/>
+                            <path d="M9 5c-.2 0-.4.2-.4.4v7.2c0 .2.2.4.4.4s.4-.2.4-.4V5.4c0-.2-.2-.4-.4-.4z"/>
+                            <path d="M6.5 7.5c-.2 0-.4.2-.4.4v2.2c0 .2.2.4.4.4s.4-.2.4-.4V7.9c0-.2-.2-.4-.4-.4zm5 0c-.2 0-.4.2-.4.4v2.2c0 .2.2.4.4.4s.4-.2.4-.4V7.9c0-.2-.2-.4-.4-.4z"/>
+                          </svg>
+                          <span>Pay</span>
+                        </button>
+
+                        {/* Add to Bag Button */}
+                        <button
+                          className="add-to-cart a-btn"
+                          type="button"
+                          onClick={handleAddToBag}
+                          data-default-text="ADD TO BAG"
+                          data-result-text="ADDED"
+                        >
+                          ADD TO BAG
+                        </button>
+                      </div>
+
+                      {/* Terms of Service */}
+                      <p className="f-body a-text a-text--secondary a-text--apple-pay-notice">
+                        BY PLACING YOUR ORDER YOU AGREE TO THE{' '}
+                        <a href="/terms-of-service" className="policy-link link--on-gray-bg" target="_blank" rel="noopener noreferrer">
+                          TERMS OF SERVICE
+                        </a>
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </section>

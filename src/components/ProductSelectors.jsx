@@ -73,6 +73,10 @@ const ProductSelectors = ({ colors, sizes, selectedColor, selectedSize, onColorC
                 </li>
               ))}
             </ul>
+            {/* Size Guide Link */}
+            <a href="#size-guide" className="m-selector__size-guide-link">
+              SIZE GUIDE &gt;
+            </a>
           </div>
         </div>
       )}

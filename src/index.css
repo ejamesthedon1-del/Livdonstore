@@ -1673,18 +1673,50 @@ body {
   justify-content: center;
 }
 
+.m-selector__size-guide-link {
+  display: block;
+  margin-top: 1rem;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: #000;
+  text-decoration: none;
+  transition: opacity 0.3s ease;
+}
+
+.m-selector__size-guide-link:hover {
+  opacity: 0.6;
+}
+
 /* Product CTA Actions */
 .o-product__cta-actions {
   width: 100%;
   max-width: 100%;
-  padding: 1.5rem 1rem;
+  padding: 2rem 1rem 1.5rem 1rem;
   overflow-x: hidden;
   box-sizing: border-box;
 }
 
+/* Mobile: Fixed at bottom of screen */
+@media (max-width: 767px) {
+  .o-product__cta-actions {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    z-index: 45;
+    padding: 1rem;
+    border-top: 1px solid #e5e5e5;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
 @media (min-width: 768px) {
   .o-product__cta-actions {
-    padding: 2rem;
+    padding: 2rem 2rem 1.5rem 2rem;
+    position: relative; /* Normal flow on desktop */
   }
 }
 
@@ -1797,10 +1829,189 @@ body {
   box-sizing: border-box;
 }
 
+@media (max-width: 767px) {
+  .o-product__content {
+    padding-bottom: 200px; /* Space for fixed CTA section at bottom */
+  }
+}
+
 @media (min-width: 768px) {
   .o-product__content {
     padding: 2rem;
+    padding-bottom: 2rem; /* Normal padding on desktop */
   }
+}
+
+/* Delivery Info */
+.o-product__delivery-info {
+  width: 100%;
+  max-width: 100%;
+  padding: 1.5rem 0;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+  margin: 1.5rem 0;
+}
+
+.o-product__delivery-info p {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+/* Info Sections (Accordion) */
+.o-product__info-sections {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.o-product__info-section {
+  width: 100%;
+  max-width: 100%;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.o-product__info-section-header {
+  width: 100%;
+  max-width: 100%;
+  padding: 1.5rem 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  font-family: inherit;
+}
+
+.o-product__info-section-title {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: #000;
+}
+
+.o-product__info-section-icon {
+  font-size: 1.25rem;
+  font-weight: 300;
+  color: #000;
+  line-height: 1;
+  flex-shrink: 0;
+  margin-left: 1rem;
+}
+
+.o-product__info-section-content {
+  width: 100%;
+  max-width: 100%;
+  padding: 0 0 1.5rem 0;
+  overflow-x: hidden;
+}
+
+.o-product__info-section-content p {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Info Links */
+.o-product__info-links {
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 1.5rem 0;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.o-product__info-link {
+  display: block;
+  padding: 1.5rem 0;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  color: #000;
+  text-decoration: none;
+  border-bottom: 1px solid #e5e5e5;
+  transition: opacity 0.3s ease;
+}
+
+.o-product__info-link:last-child {
+  border-bottom: none;
+}
+
+.o-product__info-link:hover {
+  opacity: 0.6;
+}
+
+/* Related Products */
+.o-product__related {
+  width: 100%;
+  max-width: 100%;
+  padding: 2rem 0;
+  overflow-x: hidden;
+}
+
+.o-product__related-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  margin: 0 0 1.5rem 0;
+}
+
+.o-product__related-products {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  width: 100%;
+  max-width: 100%;
+}
+
+.o-product__related-item {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.o-product__related-link {
+  display: block;
+  text-decoration: none;
+  color: #000;
+  width: 100%;
+  max-width: 100%;
+}
+
+.o-product__related-image {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.o-product__related-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.o-product__related-item h4 {
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  margin: 0.75rem 0 0 0;
+  text-align: left;
 }
 
 /* Product Zoom Modal */
