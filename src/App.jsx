@@ -1,12 +1,26 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import LandingPage from './components/LandingPage'
 import ProductListingPage from './components/ProductListingPage'
 import ProductDetailPage from './components/ProductDetailPage'
 import ContactPage from './components/ContactPage'
+import LockPage from './components/LockPage'
 
 function App() {
+  const [isLocked, setIsLocked] = useState(true)
   const [currentPage, setCurrentPage] = useState('landing')
   const [selectedProductId, setSelectedProductId] = useState(null)
+
+  // Check if site is unlocked on mount
+  useEffect(() => {
+    const unlocked = localStorage.getItem('siteUnlocked')
+    if (unlocked === 'true') {
+      setIsLocked(false)
+    }
+  }, [])
+
+  const handleUnlock = () => {
+    setIsLocked(false)
+  }
 
   const navigateToProducts = () => {
     setCurrentPage('products')
@@ -23,6 +37,11 @@ function App() {
   const navigateToProductDetail = (productId) => {
     setSelectedProductId(productId)
     setCurrentPage('product-detail')
+  }
+
+  // Show lock page if site is locked
+  if (isLocked) {
+    return <LockPage onUnlock={handleUnlock} />
   }
 
   if (currentPage === 'products') {
