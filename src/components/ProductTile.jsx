@@ -28,30 +28,12 @@ const ProductTile = ({ product, onNavigateToProductDetail }) => {
         <div className="m-tile-slider__visual">
           <div className="m-tile-slider__controls">
             {images.length > 1 && (
-              <>
-                <div 
-                  className="m-tile-slider__indicator" 
-                  style={{ '--i-width': `${100 / images.length}%` }}
-                >
-                  <span style={{ left: `${(currentImageIndex / images.length) * 100}%` }}></span>
-                </div>
-                <button 
-                  className="m-tile-slider__prev" 
-                  onClick={goToPrevious}
-                  disabled={images.length <= 1}
-                  aria-label="PREVIOUS IMAGES"
-                >
-                  <span className="a11y">PREVIOUS IMAGES</span>
-                </button>
-                <button 
-                  className="m-tile-slider__next" 
-                  onClick={goToNext}
-                  disabled={images.length <= 1}
-                  aria-label="NEXT IMAGES"
-                >
-                  <span className="a11y">NEXT IMAGES</span>
-                </button>
-              </>
+              <div 
+                className="m-tile-slider__indicator" 
+                style={{ '--i-width': `${100 / images.length}%` }}
+              >
+                <span style={{ left: `${(currentImageIndex / images.length) * 100}%` }}></span>
+              </div>
             )}
           </div>
 
