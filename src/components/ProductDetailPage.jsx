@@ -17,6 +17,9 @@ const ProductDetailPage = ({ productId, onBack, onNavigateToContact }) => {
   const [dragStartY, setDragStartY] = useState(0)
   const [dragCurrentY, setDragCurrentY] = useState(0)
   const [isGalleryVisible, setIsGalleryVisible] = useState(true)
+  const [drawerOverlayOpen, setDrawerOverlayOpen] = useState(false)
+  const [drawerOverlayPosition, setDrawerOverlayPosition] = useState(0) // 0 = hidden, 1 = fully visible
+  const [isOverlayTransitioning, setIsOverlayTransitioning] = useState(false)
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -116,45 +119,63 @@ const ProductDetailPage = ({ productId, onBack, onNavigateToContact }) => {
     alert(`Buy Now: ${product.title} - ${selectedColor} - Size ${selectedSize}`)
   }
 
-  // Scroll to product header function
-  const scrollToProductHeader = () => {
-    const productHeader = document.querySelector('[data-oproductscroll-header]')
-    if (productHeader) {
-      productHeader.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
-  }
 
-  // Drag handlers for puller
+  // Drag handlers for overlay drawer
   const handlePullerTouchStart = (e) => {
+    e.preventDefault()
     setIsDragging(true)
+    setIsOverlayTransitioning(false)
     setDragStartY(e.touches[0].clientY)
     setDragCurrentY(e.touches[0].clientY)
   }
 
   const handlePullerTouchMove = (e) => {
     if (!isDragging) return
+    e.preventDefault()
     const currentY = e.touches[0].clientY
     setDragCurrentY(currentY)
+    
+    // Calculate drag distance (negative = upward)
+    const dragDistance = dragStartY - currentY
+    const maxDrag = 300 // Maximum drag distance in pixels
+    const clampedDrag = Math.max(0, Math.min(dragDistance, maxDrag))
+    
+    // Convert to position (0-1)
+    const position = clampedDrag / maxDrag
+    setDrawerOverlayPosition(position)
+    setDrawerOverlayOpen(position > 0.1) // Open overlay if dragged more than 10%
   }
 
   const handlePullerTouchEnd = () => {
     if (!isDragging) return
     
     const dragDistance = dragStartY - dragCurrentY
-    const dragThreshold = 30 // Minimum pixels to trigger scroll
+    const threshold = 100 // 100px threshold to snap open
     
-    if (dragDistance > dragThreshold) {
-      // User dragged upward, scroll to product header
-      scrollToProductHeader()
+    setIsOverlayTransitioning(true)
+    
+    if (dragDistance > threshold) {
+      // Snap to fully open
+      setDrawerOverlayPosition(1)
+      setDrawerOverlayOpen(true)
+    } else {
+      // Snap back to closed
+      setDrawerOverlayPosition(0)
+      setDrawerOverlayOpen(false)
     }
     
     setIsDragging(false)
     setDragStartY(0)
     setDragCurrentY(0)
+    
+    // Reset transition flag after animation
+    setTimeout(() => setIsOverlayTransitioning(false), 300)
   }
 
   const handlePullerMouseDown = (e) => {
+    e.preventDefault()
     setIsDragging(true)
+    setIsOverlayTransitioning(false)
     setDragStartY(e.clientY)
     setDragCurrentY(e.clientY)
   }
@@ -164,21 +185,43 @@ const ProductDetailPage = ({ productId, onBack, onNavigateToContact }) => {
     if (!isDragging) return
 
     const handleGlobalMouseMove = (e) => {
-      setDragCurrentY(e.clientY)
+      e.preventDefault()
+      const currentY = e.clientY
+      setDragCurrentY(currentY)
+      
+      // Calculate drag distance (negative = upward)
+      const dragDistance = dragStartY - currentY
+      const maxDrag = 300 // Maximum drag distance in pixels
+      const clampedDrag = Math.max(0, Math.min(dragDistance, maxDrag))
+      
+      // Convert to position (0-1)
+      const position = clampedDrag / maxDrag
+      setDrawerOverlayPosition(position)
+      setDrawerOverlayOpen(position > 0.1) // Open overlay if dragged more than 10%
     }
 
     const handleGlobalMouseUp = () => {
       const dragDistance = dragStartY - dragCurrentY
-      const dragThreshold = 30 // Minimum pixels to trigger scroll
+      const threshold = 100 // 100px threshold to snap open
       
-      if (dragDistance > dragThreshold) {
-        // User dragged upward, scroll to product header
-        scrollToProductHeader()
+      setIsOverlayTransitioning(true)
+      
+      if (dragDistance > threshold) {
+        // Snap to fully open
+        setDrawerOverlayPosition(1)
+        setDrawerOverlayOpen(true)
+      } else {
+        // Snap back to closed
+        setDrawerOverlayPosition(0)
+        setDrawerOverlayOpen(false)
       }
       
       setIsDragging(false)
       setDragStartY(0)
       setDragCurrentY(0)
+      
+      // Reset transition flag after animation
+      setTimeout(() => setIsOverlayTransitioning(false), 300)
     }
     
     document.addEventListener('mousemove', handleGlobalMouseMove)
@@ -427,6 +470,116 @@ const ProductDetailPage = ({ productId, onBack, onNavigateToContact }) => {
       </main>
 
       <Footer onNavigateToContact={onNavigateToContact} />
+
+      {/* Drawer Overlay - Slides up from bottom */}
+      {drawerOverlayOpen && (
+        <>
+          {/* Backdrop */}
+          <div 
+            className="o-product__drawer-backdrop"
+            style={{
+              opacity: drawerOverlayPosition * 0.5,
+              pointerEvents: drawerOverlayPosition > 0.5 ? 'all' : 'none'
+            }}
+            onClick={() => {
+              setDrawerOverlayOpen(false)
+              setDrawerOverlayPosition(0)
+            }}
+          />
+          
+          {/* Drawer Overlay Content */}
+          <div 
+            className="o-product__drawer-overlay"
+            style={{
+              transform: `translateY(${100 - (drawerOverlayPosition * 100)}%)`,
+              transition: isOverlayTransitioning ? 'transform 0.3s ease-out' : 'none'
+            }}
+          >
+            <div className="o-product__drawer-overlay-content">
+              {/* Product Header */}
+              <div className="o-product__header">
+                <div className="o-product__header-meta">
+                  <div className="o-product__header-titles">
+                    <h1 className="o-product__title f-body">
+                      <span className="o-product__title-truncate f-body">{product.title}</span>
+                    </h1>
+                    <p className="f-body--em">
+                      <span className="prices">
+                        <strong data-description="value" className="f-body--em" content={product.price.replace(/,/g, '')}>
+                          {product.price} USD
+                        </strong>
+                      </span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Product Content */}
+              <div className="o-product__content">
+                <form className="o-form o-form--selectors s-appears-complete" id="form-product-overlay">
+                  <ProductSelectors
+                    colors={product.colors}
+                    sizes={product.sizes}
+                    selectedColor={selectedColor}
+                    selectedSize={selectedSize}
+                    onColorChange={setSelectedColor}
+                    onSizeChange={setSelectedSize}
+                  />
+                </form>
+
+                {/* Estimated Delivery Date */}
+                <div className="o-product__delivery-info">
+                  <p className="f-body--em">
+                    ESTIMATED DELIVERY DATE: STARTING FROM TUESDAY FEBRUARY 3
+                  </p>
+                </div>
+
+                {/* Expandable Sections */}
+                <div className="o-product__info-sections">
+                  <ProductInfoSection
+                    title="DETAILS"
+                    content="Product details and specifications will appear here when expanded."
+                  />
+                  <ProductInfoSection
+                    title="CARE AND MAINTENANCE"
+                    content="Care instructions and maintenance guidelines will appear here when expanded."
+                  />
+                </div>
+
+                {/* Information Links */}
+                <div className="o-product__info-links">
+                  <a href="#check-availability" className="o-product__info-link">
+                    CHECK AVAILABILITY IN STORE &gt;
+                  </a>
+                  <a href="#shipping" className="o-product__info-link">
+                    SHIPPING &gt;
+                  </a>
+                  <a href="#returns" className="o-product__info-link">
+                    RETURNS AND EXCHANGES (WITHIN 14 DAYS) &gt;
+                  </a>
+                </div>
+
+                {/* You May Also Like Section */}
+                <div className="o-product__related">
+                  <h3 className="o-product__related-title f-body--em">YOU MAY ALSO LIKE</h3>
+                  <div className="o-product__related-products">
+                    <RelatedProduct
+                      image="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwMCIgaGVpZ2h0PSIxMDAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjEwMDAiIGZpbGw9IiMxMzE4MjMiLz48L3N2Zz4="
+                      title="NAVY BLAZER"
+                      onNavigateToProductDetail={() => {}}
+                    />
+                    <RelatedProduct
+                      image="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwMCIgaGVpZ2h0PSIxMDAwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxyZWN0IHdpZHRoPSIxMDAwIiBoZWlnaHQ9IjEwMDAiIGZpbGw9IiMyRDNGMkMiLz48L3N2Zz4="
+                      title="GREEN BLAZER"
+                      onNavigateToProductDetail={() => {}}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   )
 }

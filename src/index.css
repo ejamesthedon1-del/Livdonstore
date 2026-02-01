@@ -2074,6 +2074,52 @@ body {
   text-align: left;
 }
 
+/* Drawer Overlay */
+.o-product__drawer-backdrop {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .o-product__drawer-backdrop {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 48;
+    transition: opacity 0.3s ease-out;
+  }
+}
+
+.o-product__drawer-overlay {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .o-product__drawer-overlay {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    z-index: 49;
+    max-height: 85vh;
+    border-radius: 1rem 1rem 0 0;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+  }
+
+  .o-product__drawer-overlay-content {
+    max-height: 85vh;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 200px; /* Space for fixed CTA */
+  }
+}
+
 /* Product Zoom Modal */
 .o-product__zoom-modal {
   position: fixed;
