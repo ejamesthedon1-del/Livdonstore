@@ -87,7 +87,7 @@ const ProductDetailPage = ({ productId, onBack, onNavigateToContact }) => {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white" style={{ width: '100%', maxWidth: '100vw', overflowX: 'hidden' }}>
       {/* CELINE-style Header */}
       <header id="header">
         <div className="g-header-logo">
@@ -182,81 +182,85 @@ const ProductDetailPage = ({ productId, onBack, onNavigateToContact }) => {
         
         <div className="a17-grid__right">
           <div className="home-main homepage">
-            {/* Breadcrumb */}
-            <div className="m-breadcrumb m-breadcrumb--inline" data-behavior="mBreadcrumb">
-              <div className="m-breadcrumb__items">
-                <div className="m-breadcrumb__item f-body--em">
-                  <a href="#" onClick={(e) => { e.preventDefault(); onBack && onBack() }}>NEW COLLECTION WOMEN</a>
-                </div>
-              </div>
-            </div>
-
             {/* Product Section */}
             <section className="o-product product-detail" data-pid={product.id}>
               <div className="o-product__product">
                 {/* Product Gallery */}
                 <ProductGallery images={product.images} productTitle={product.title} />
 
-                {/* Product Meta */}
-                <div className="o-product__meta" data-oproductscroll-meta="">
-                  {/* Product Header */}
-                  <div className="o-product__header" data-oproductscroll-header="">
-                    <div className="o-product__header-meta">
-                      <div className="o-product__header-titles">
-                        <h1 className="o-product__title f-body">
-                          <span className="o-product__title-truncate f-body">{product.title}</span>
-                        </h1>
-                        <p className="f-body--em">
-                          <span className="prices">
-                            <strong data-description="value" className="f-body--em" content={product.price.replace(/,/g, '')}>
-                              {product.price} USD
-                            </strong>
-                          </span>
-                        </p>
-                      </div>
+                {/* Product Header - Moved after gallery */}
+                <div className="o-product__header" data-oproductscroll-header="">
+                  <div className="o-product__header-meta">
+                    <div className="o-product__header-titles">
+                      <h1 className="o-product__title f-body">
+                        <span className="o-product__title-truncate f-body">{product.title}</span>
+                      </h1>
+                      <p className="f-body--em">
+                        <span className="prices">
+                          <strong data-description="value" className="f-body--em" content={product.price.replace(/,/g, '')}>
+                            {product.price} USD
+                          </strong>
+                        </span>
+                      </p>
                     </div>
                   </div>
+                </div>
 
-                  {/* Product Content */}
-                  <div className="o-product__content" data-oproductscroll-content="">
-                    <form className="o-form o-form--selectors s-appears-complete" id="form-product">
-                      <ProductSelectors
-                        colors={product.colors}
-                        sizes={product.sizes}
-                        selectedColor={selectedColor}
-                        selectedSize={selectedSize}
-                        onColorChange={setSelectedColor}
-                        onSizeChange={setSelectedSize}
-                      />
-                    </form>
-                  </div>
+                {/* CTA Actions - Side by side buttons */}
+                <div className="o-product__cta-actions" data-oproductscroll-actions="">
+                  <div className="o-product__cta-actions-inner">
+                    <div className="a11y" aria-live="polite" id="add-to-cart-live" role="status"></div>
+                    
+                    <div className="prices-add-to-cart-actions o-product__action-ctas">
+                      {/* Apple Pay Button */}
+                      <button
+                        className="apple-pay-button a-btn"
+                        type="button"
+                        onClick={handleBuyNow}
+                        aria-label="Pay with Apple Pay"
+                      >
+                        <svg className="apple-pay-icon" width="18" height="18" viewBox="0 0 18 18" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12.5 1.5c-.8-1.3-2.1-2.3-3.5-2.3-1.4 0-2.7 1-3.5 2.3-.8 1.3-1 2.9-.4 4.1.6 1.2 1.5 2.2 2.4 3.1.9.9 2 1.9 3.1 2.4 1.2.5 2.8.3 4.1-.4 1.3-.8 2.3-2.1 2.3-3.5 0-1.4-1-2.7-2.3-3.5-.5-.3-1.1-.5-1.6-.7zm-1.6 1.3c.5.1 1.1.4 1.6.7 1.3.8 2.3 2.1 2.3 3.5 0 1.4-1 2.7-2.3 3.5-1.3.8-2.9 1-4.1.4-1.2-.5-2.2-1.4-3.1-2.4-.9-.9-1.9-2-2.4-3.1-.6-1.2-.4-2.8.4-4.1.8-1.3 2.1-2.3 3.5-2.3 1.4 0 2.7 1 3.5 2.3z"/>
+                          <path d="M9 5c-.2 0-.4.2-.4.4v7.2c0 .2.2.4.4.4s.4-.2.4-.4V5.4c0-.2-.2-.4-.4-.4z"/>
+                          <path d="M6.5 7.5c-.2 0-.4.2-.4.4v2.2c0 .2.2.4.4.4s.4-.2.4-.4V7.9c0-.2-.2-.4-.4-.4zm5 0c-.2 0-.4.2-.4.4v2.2c0 .2.2.4.4.4s.4-.2.4-.4V7.9c0-.2-.2-.4-.4-.4z"/>
+                        </svg>
+                        <span>Pay</span>
+                      </button>
 
-                  {/* CTA Actions */}
-                  <div className="o-product__cta-actions" data-oproductscroll-actions="">
-                    <div className="o-product__cta-actions-inner">
-                      <div className="a11y" aria-live="polite" id="add-to-cart-live" role="status"></div>
-                      
-                      <div className="prices-add-to-cart-actions o-product__action-ctas buy-now--secondary">
-                        <button
-                          className="add-to-cart a-btn"
-                          type="button"
-                          onClick={handleAddToBag}
-                          data-default-text="ADD TO BAG"
-                          data-result-text="ADDED"
-                        >
-                          ADD TO BAG
-                        </button>
-                        
-                        <button
-                          className="a-btn add-to-cart-buy-now"
-                          type="button"
-                          onClick={handleBuyNow}
-                        >
-                          Buy Now
-                        </button>
-                      </div>
+                      {/* Add to Bag Button */}
+                      <button
+                        className="add-to-cart a-btn"
+                        type="button"
+                        onClick={handleAddToBag}
+                        data-default-text="ADD TO BAG"
+                        data-result-text="ADDED"
+                      >
+                        ADD TO BAG
+                      </button>
                     </div>
+
+                    {/* Terms of Service */}
+                    <p className="f-body a-text a-text--secondary a-text--apple-pay-notice">
+                      By placing your order you agree to the{' '}
+                      <a href="/terms-of-service" className="policy-link link--on-gray-bg" target="_blank" rel="noopener noreferrer">
+                        terms of service
+                      </a>
+                    </p>
                   </div>
+                </div>
+
+                {/* Product Content - Selectors moved below CTA */}
+                <div className="o-product__content" data-oproductscroll-content="">
+                  <form className="o-form o-form--selectors s-appears-complete" id="form-product">
+                    <ProductSelectors
+                      colors={product.colors}
+                      sizes={product.sizes}
+                      selectedColor={selectedColor}
+                      selectedSize={selectedSize}
+                      onColorChange={setSelectedColor}
+                      onSizeChange={setSelectedSize}
+                    />
+                  </form>
                 </div>
               </div>
             </section>

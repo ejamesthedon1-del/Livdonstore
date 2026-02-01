@@ -4,9 +4,12 @@ const ProductGallery = ({ images, productTitle }) => {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
   const [isZoomOpen, setIsZoomOpen] = useState(false)
 
-  const handleImageClick = (index) => {
-    setSelectedImageIndex(index)
+  const handleMainImageClick = () => {
     setIsZoomOpen(true)
+  }
+
+  const handleThumbnailClick = (index) => {
+    setSelectedImageIndex(index)
   }
 
   const closeZoom = () => {
@@ -24,27 +27,59 @@ const ProductGallery = ({ images, productTitle }) => {
   return (
     <>
       <div className="o-product__gallery" data-oproductscroll-gallery="">
-        <ul className="o-product__gallery-imgs o-product__gallery-imgs--even" data-behavior="oZoomGallery">
-          {images.map((image, index) => (
-            <li key={index} itemScope itemType="https://schema.org/ImageObject" className="o-product__gallery-item">
-              <button
-                data-ozoomgallery-item=""
-                className="o-product__gallery-img a-ratio-box"
-                onClick={() => handleImageClick(index)}
-                aria-label={`View image ${index + 1} of ${images.length}`}
-              >
-                <img
-                  src={image}
-                  alt={`${productTitle} - ${index + 1}`}
-                  loading={index === 0 ? 'eager' : 'lazy'}
-                  className="d-block img-fluid"
-                  itemProp="image"
-                />
-                <meta itemProp="name" content={`${productTitle} - ${index + 1} | LIVDON`} />
-              </button>
-            </li>
-          ))}
-        </ul>
+        {/* Main Image */}
+        <div className="o-product__gallery-main" itemScope itemType="https://schema.org/ImageObject">
+          <button
+            className="o-product__gallery-main-img"
+            onClick={handleMainImageClick}
+            aria-label={`View image ${selectedImageIndex + 1} of ${images.length}`}
+          >
+            <img
+              src={images[selectedImageIndex]}
+              alt={`${productTitle} - ${selectedImageIndex + 1}`}
+              loading="eager"
+              className="d-block img-fluid"
+              itemProp="image"
+            />
+            <meta itemProp="name" content={`${productTitle} - ${selectedImageIndex + 1} | LIVDON`} />
+          </button>
+        </div>
+
+        {/* Thumbnail Strip */}
+        {images.length > 1 && (
+          <div className="o-product__gallery-thumbnails">
+            <div className="o-product__gallery-thumbnails-inner">
+              {images.map((image, index) => (
+                <button
+                  key={index}
+                  className={`o-product__gallery-thumbnail ${index === selectedImageIndex ? 's-selected' : ''}`}
+                  onClick={() => handleThumbnailClick(index)}
+                  aria-label={`Select image ${index + 1}`}
+                >
+                  <img
+                    src={image}
+                    alt={`${productTitle} thumbnail ${index + 1}`}
+                    loading="lazy"
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Pagination Indicators */}
+        {images.length > 1 && (
+          <div className="o-product__gallery-pagination">
+            {images.map((_, index) => (
+              <div
+                key={index}
+                className={`o-product__gallery-pagination-dot ${index === selectedImageIndex ? 's-active' : ''}`}
+                onClick={() => handleThumbnailClick(index)}
+                aria-label={`Go to image ${index + 1}`}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Zoom Modal */}
