@@ -4,7 +4,7 @@ import ProductTile from './ProductTile'
 import Footer from './Footer'
 import MobileMenu from './MobileMenu'
 
-const ProductListingPage = ({ onBack, onNavigateToContact }) => {
+const ProductListingPage = ({ onBack, onNavigateToContact, onNavigateToProductDetail }) => {
   const [showInStockOnly, setShowInStockOnly] = useState(false)
   const [sortBy, setSortBy] = useState('SUGGESTED')
   const [showFilters, setShowFilters] = useState(false)
@@ -279,7 +279,7 @@ const ProductListingPage = ({ onBack, onNavigateToContact }) => {
               {/* Product Grid */}
               <ul className="o-listing-grid" data-behavior="oListingGrid">
                 {filteredProducts.map((product) => (
-                  <ProductTile key={product.id} product={product} />
+                  <ProductTile key={product.id} product={product} onNavigateToProductDetail={onNavigateToProductDetail} />
                 ))}
               </ul>
             </div>

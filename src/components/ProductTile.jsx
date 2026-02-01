@@ -1,6 +1,12 @@
 import { useState } from 'react'
 
-const ProductTile = ({ product }) => {
+const ProductTile = ({ product, onNavigateToProductDetail }) => {
+  const handleClick = (e) => {
+    e.preventDefault()
+    if (onNavigateToProductDetail) {
+      onNavigateToProductDetail(product.id)
+    }
+  }
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const images = product.images || [product.image]
 
@@ -58,6 +64,7 @@ const ProductTile = ({ product }) => {
                 aria-roledescription="slide"
                 aria-label={`${index + 1} OF ${images.length}`}
                 href={product.link || '#'}
+                onClick={handleClick}
               >
                 <img
                   src={img}
@@ -70,7 +77,7 @@ const ProductTile = ({ product }) => {
           </div>
         </div>
 
-        <a href={product.link || '#'} className="m-product-listing__meta">
+        <a href={product.link || '#'} className="m-product-listing__meta" onClick={handleClick}>
           <h2 className="m-product-listing__meta-title f-body">
             {product.title}
             {product.color && <span className="a11y">; {product.color}</span>}
