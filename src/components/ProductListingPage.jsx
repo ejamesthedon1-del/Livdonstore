@@ -35,7 +35,7 @@ const ProductListingPage = ({ onBack, onNavigateToContact, onNavigateToProductDe
       color: 'TAN',
       price: '1,950',
       link: '#product-1',
-      images: [greyPlaceholder, greyPlaceholder],
+      images: ['/CBB45F85-E245-4674-9FB4-3377E874CCEC.JPG', greyPlaceholder],
       inStock: true,
     },
     {

@@ -63,7 +63,7 @@ const ProductDetailPage = ({ productId, onBack, onNavigateToContact }) => {
     title: 'COLONNE JACKET IN DIAGONAL WOOL',
     price: '3,450',
     images: [
-      greyPlaceholder,
+      '/CBB45F85-E245-4674-9FB4-3377E874CCEC.JPG',
       greyPlaceholder,
       greyPlaceholder,
       greyPlaceholder,
