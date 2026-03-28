@@ -31,8 +31,8 @@ const LandingPage = ({ onNavigateToProducts, onNavigateToContact }) => {
       <header id="header">
         <div className="g-header-logo">
           <h1>
-            <a href="/" className="a-logo" title="LIVDON | HOMEPAGE">
-              <img src="/Asset_1.png.webp" alt="LIVDON" className="a-logo__img" />
+            <a href="/" className="a-logo" title="Sinners Testimony | Homepage">
+              <img src="/sinners-testimony-logo.svg" alt="Sinners Testimony" className="a-logo__img" />
             </a>
           </h1>
           

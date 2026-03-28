@@ -98,7 +98,7 @@ const LockPage = ({ onUnlock }) => {
       </button>
       <div className="lock-page__container">
         <div className="lock-page__logo">
-          <img src="/Asset_1.png.webp" alt="LIVDON" className="lock-page__logo-img" />
+          <img src="/sinners-testimony-logo.svg" alt="Sinners Testimony" className="lock-page__logo-img" />
         </div>
 
         <div className="lock-page__timer">

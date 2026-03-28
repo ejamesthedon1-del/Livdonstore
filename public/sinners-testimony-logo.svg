@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 80" width="320" height="80">
+  <defs>
+    <style>
+      @font-face {
+        font-family: 'Satoshi';
+        font-weight: 700;
+        font-style: normal;
+        src: url('https://fonts.cdnfonts.com/s/85546/Satoshi-Bold.woff') format('woff');
+      }
+      .logo { font-family: 'Satoshi', sans-serif; font-weight: 700; font-size: 36px; letter-spacing: -0.02em; line-height: 0.95; fill: #000000; text-transform: uppercase; }
+      .tm { font-size: 0.7em; }
+    </style>
+  </defs>
+  <text x="0" y="38" class="logo">Sinners</text>
+  <text x="0" y="76" class="logo">Testimony<tspan class="tm">&#174;</tspan></text>
+</svg>

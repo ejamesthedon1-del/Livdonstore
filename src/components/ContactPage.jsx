@@ -27,8 +27,8 @@ const ContactPage = ({ onBack }) => {
       <header id="header">
         <div className="g-header-logo">
           <h1>
-            <a href="/" className="a-logo" title="LIVDON | HOMEPAGE" onClick={(e) => { e.preventDefault(); onBack && onBack() }}>
-              <img src="/Asset_1.png.webp" alt="LIVDON" className="a-logo__img" />
+            <a href="/" className="a-logo" title="Sinners Testimony | Homepage" onClick={(e) => { e.preventDefault(); onBack && onBack() }}>
+              <img src="/sinners-testimony-logo.svg" alt="Sinners Testimony" className="a-logo__img" />
             </a>
           </h1>
           

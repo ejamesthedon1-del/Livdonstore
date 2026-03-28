@@ -1,27 +1,8 @@
-import { FiX } from 'react-icons/fi'
-
 const MobileMenu = ({ isOpen, onClose, cartItemCount, onNavigateToContact }) => {
   return (
     <div className={`a17-grid__left o-sidebar-nav ${isOpen ? 'o-sidebar-nav--open' : ''}`}>
       <nav className="o-sidebar-nav__nav" aria-labelledby="sidebar-nav-label">
         <p className="sr-only" id="sidebar-nav-label">SIDEBAR NAVIGATION</p>
-        
-        {/* Mobile Menu Header */}
-        <div className="o-sidebar-nav__header">
-          <h1>
-            <a href="/" className="a-logo" title="LIVDON | HOMEPAGE">
-              <img src="/Asset_1.png.webp" alt="LIVDON" className="a-logo__img" />
-            </a>
-          </h1>
-          <button
-            type="button"
-            className="o-sidebar-nav__close"
-            onClick={onClose}
-            aria-label="CLOSE MENU"
-          >
-            <FiX className="w-6 h-6" />
-          </button>
-        </div>
 
         <ul className="o-sidebar-nav__list">
           {/* General Links */}
@@ -31,7 +12,7 @@ const MobileMenu = ({ isOpen, onClose, cartItemCount, onNavigateToContact }) => 
               className="a-btn a-btn--as-link o-sidebar-nav__link"
               onClick={onClose}
             >
-              LIVDON GIFTS
+              GIFTS
             </a>
           </li>
           <li>
@@ -40,7 +21,7 @@ const MobileMenu = ({ isOpen, onClose, cartItemCount, onNavigateToContact }) => 
               className="a-btn a-btn--as-link o-sidebar-nav__link"
               onClick={onClose}
             >
-              LIVDON NEW
+              NEW
             </a>
           </li>
           <li>
@@ -49,7 +30,7 @@ const MobileMenu = ({ isOpen, onClose, cartItemCount, onNavigateToContact }) => 
               className="a-btn a-btn--as-link o-sidebar-nav__link"
               onClick={onClose}
             >
-              LIVDON SHOWS
+              SHOWS
             </a>
           </li>
 
@@ -60,7 +41,7 @@ const MobileMenu = ({ isOpen, onClose, cartItemCount, onNavigateToContact }) => 
               className="a-btn a-btn--as-link o-sidebar-nav__link"
               onClick={onClose}
             >
-              LIVDON SHOP WOMEN
+              SHOP WOMEN
             </a>
           </li>
           <li>
@@ -69,7 +50,7 @@ const MobileMenu = ({ isOpen, onClose, cartItemCount, onNavigateToContact }) => 
               className="a-btn a-btn--as-link o-sidebar-nav__link"
               onClick={onClose}
             >
-              LIVDON SHOP MEN
+              SHOP MEN
             </a>
           </li>
           <li>
@@ -78,7 +59,7 @@ const MobileMenu = ({ isOpen, onClose, cartItemCount, onNavigateToContact }) => 
               className="a-btn a-btn--as-link o-sidebar-nav__link"
               onClick={onClose}
             >
-              LIVDON HAUTE PARFUMERIE
+              HAUTE PARFUMERIE
             </a>
           </li>
           <li>
@@ -87,7 +68,7 @@ const MobileMenu = ({ isOpen, onClose, cartItemCount, onNavigateToContact }) => 
               className="a-btn a-btn--as-link o-sidebar-nav__link"
               onClick={onClose}
             >
-              LIVDON BEAUTÉ
+              BEAUTÉ
             </a>
           </li>
           <li>
@@ -96,7 +77,7 @@ const MobileMenu = ({ isOpen, onClose, cartItemCount, onNavigateToContact }) => 
               className="a-btn a-btn--as-link o-sidebar-nav__link"
               onClick={onClose}
             >
-              LIVDON MAISON
+              MAISON
             </a>
           </li>
 
@@ -107,7 +88,7 @@ const MobileMenu = ({ isOpen, onClose, cartItemCount, onNavigateToContact }) => 
               className="a-btn a-btn--as-link o-sidebar-nav__link"
               onClick={onClose}
             >
-              LIVDON MAISON DE COUTURE
+              MAISON DE COUTURE
             </a>
           </li>
         </ul>
